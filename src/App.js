@@ -11,6 +11,8 @@ import CustomDialog from "../src/component/customDialog/customDialog"
 import { Grid } from '@mui/material';
 import Button from '@mui/material/Button';
 import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined';
+import Checkbox from '@mui/material/Checkbox';
+import FormControlLabel from '@mui/material/FormControlLabel';
 import axios from "axios";
 function App() {
   const mdTheme = createTheme({
@@ -24,6 +26,18 @@ function App() {
   const [isEdit, setIsEdit] = React.useState(false);
   const [todo, setTodo] = React.useState([]);
   const [editData, setEditData] = React.useState({ title: '', description: '', color: '#AC94C7', dateTime: '' });
+
+  const [checked, setChecked] = React.useState(false);
+
+  const handleChange = (event) => {
+    setChecked(event.target.checked);
+    let url = 'http://localhost:4401/todos';
+    if (event.target.checked) {
+      url += `?draft=${true}`
+    }
+    getTodoData(url);
+  };
+
   const handleClickOpen = () => {
     setOpen(true);
     setIsEdit(false);
@@ -32,7 +46,15 @@ function App() {
 
   const handleClose = () => {
     setOpen(false);
-    getTodoData();
+    getTodoData('http://localhost:4401/todos');
+  };
+  const SearchFunction = (searchData) => {
+    console.log("test re", searchData)
+    let url = 'http://localhost:4401/todos';
+    if (searchData) {
+      url += `?title=${searchData}`
+    }
+    getTodoData(url);
   };
 
   const completeTodo = (values) => {
@@ -43,11 +65,10 @@ function App() {
         handleClose();
       })
       .catch(error => {
-        // this.setState({ errorMessage: error.message });
         console.error('There was an error!', error);
       });
   }
-  
+
   const editForm = (id) => {
     axios.get(`http://localhost:4401/todos/${id}`).then((response) => {
       console.log(response.data);
@@ -56,14 +77,14 @@ function App() {
       setIsEdit(true)
     });
   };
-  const getTodoData = () => {
-    axios.get('http://localhost:4401/todos').then((response) => {
+  const getTodoData = (url) => {
+    axios.get(url).then((response) => {
       console.log(response.data);
       setTodo(response.data);
     });
   }
   useEffect(() => {
-    getTodoData();
+    getTodoData('http://localhost:4401/todos');
   }, [])
   useEffect(() => {
     setTodo(todo)
@@ -73,18 +94,26 @@ function App() {
     <ThemeProvider theme={mdTheme}>
       <div className="App">
         <Header label='ToDos' />
-        {/* alignItems="center" */}
         <Grid container spacing={0} direction="column" justifyContent="center" className='content-grid'>
           <Grid item lg={12} md={12}>
-            <Search />
+            <Search onSearchClick={SearchFunction} />
           </Grid>
-          {/* <Grid container lg={12} md={12} > */}
           <Grid item lg={12} md={12} style={{ display: 'flex' }} >
             <Grid item lg={6} md={6} style={{ display: 'flex' }}>
               <ButtonComponent type="button" variant="text" label='Add ToDo' startIcon={<AddBoxOutlinedIcon />} onClick={handleClickOpen} />
             </Grid>
             <Grid item lg={6} md={6} style={{ display: 'flex', justifyContent: 'end' }}>
-              <ButtonComponent label='Add ToDo' />
+              <FormControlLabel
+              className='showDraft'
+                control={
+                  <Checkbox
+                    checked={checked}
+                    onChange={handleChange}
+                    inputProps={{ 'aria-label': 'controlled' }}
+                  />
+                }
+                label="Show draft" />
+
             </Grid>
           </Grid>
           {todo.map(ele => (

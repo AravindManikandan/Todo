@@ -21,6 +21,8 @@ import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import DeleteIcon from '@mui/icons-material/Delete';
+import SaveAltIcon from '@mui/icons-material/SaveAlt';
+import CancelPresentationIcon from '@mui/icons-material/CancelPresentation';
 import axios from "axios";
 
 const CustomDialog = (props) => {
@@ -82,33 +84,17 @@ const CustomDialog = (props) => {
     }
     return (
         <Dialog open={props.open} onClose={props.handleClose}>
-            <DialogTitle>        <Header label="Add/Edit Todo" /></DialogTitle>
+            <DialogTitle>
+                <header className="main-header">
+                    Add/Edit Todo <CancelPresentationIcon onClick={props.handleClose} /></header>
+            </DialogTitle>
             <DialogContent>
                 <Formik
                     initialValues={todoData}
                     enableReinitialize={true}
-                    // onSubmit={(values) => {
-                    // console.log("values 1", values)
-                    // onSubmitForm(values);
-                    // setSubmitting(true);
-                    // axios.post(contactFormEndpoint,
-                    //     values,
-                    //     {
-                    //         headers: {
-                    //             'Access-Control-Allow-Origin': '*',
-                    //             'Content-Type': 'application/json',
-                    //         }
-                    //     },
-                    // ).then((resp) => {
-                    //     setSubmitionCompleted(true);
-                    // }
-                    // );
-                    // }}
-
                     validationSchema={Yup.object().shape({
-                        // email: Yup.string()
-                        //     .email()
-                        //     .required('Required'),
+                        dateTime: Yup.string()
+                            .required('Required'),
                         title: Yup.string()
                             .required('Required'),
                         description: Yup.string()
@@ -161,7 +147,7 @@ const CustomDialog = (props) => {
                                         />
                                     </Grid>
                                     <Grid item lg={12} md={12} style={{ display: 'flex' }} >
-                                        <Grid item lg={6} md={6} style={{ display: 'flex' }} className="pdtop20">
+                                        <Grid item lg={6} md={6} style={{ display: 'flex' }} className="pdtop20 radioGroup">
                                             <Radio
                                                 checked={values.color === "#AC94C7"}
                                                 onChange={() => setFieldValue("color", "#AC94C7")}
@@ -223,7 +209,7 @@ const CustomDialog = (props) => {
                                         </Grid>
                                         <Grid item lg={6} md={6} spacing={2} style={{ display: 'flex', justifyContent: 'end' }} >
                                             <ButtonComponent type="button" className="saveDraftbtn" variant="outlined" label='Save as Draft' onClick={() => { onSubmitForm(values, errors, true) }} />
-                                            <ButtonComponent type="button" className="savebtn" variant="contained" label='Save' startIcon={<DeleteIcon />} onClick={() => { onSubmitForm(values, errors, false) }} />
+                                            <ButtonComponent type="button" className="savebtn" variant="contained" label='Save' startIcon={<SaveAltIcon />} onClick={() => { onSubmitForm(values, errors, false) }} />
                                         </Grid>
                                     </Grid>
                                 </DialogActions>

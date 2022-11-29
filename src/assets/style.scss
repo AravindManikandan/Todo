@@ -20,7 +20,7 @@
     max-width: unset !important;
 }
 
-.Mui-checked {
+.radioGroup .Mui-checked {
     border: 1px solid #040404 !important;
 }
 
@@ -69,4 +69,8 @@
 .savebtn {
     background: #48233C !important;
     text-transform: capitalize !important;
+}
+
+.showDraft{
+    margin: 0px !important;
 }
