@@ -52,7 +52,7 @@ function App() {
     console.log("test re", searchData)
     let url = 'http://localhost:4401/todos';
     if (searchData) {
-      url += `?title=${searchData}`
+      url += `?title_like=${searchData}`
     }
     getTodoData(url);
   };
