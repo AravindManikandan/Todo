@@ -1,0 +1,72 @@
+.main-header {
+    background-color: #48233C !important;
+    color: #FFFFFF;
+    // position: absolute;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 39px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.searchField .MuiInputBase-input {
+    padding: unset !important;
+}
+
+.MuiDialog-paper {
+    width: 100%;
+    max-width: unset !important;
+}
+
+.Mui-checked {
+    border: 1px solid #040404 !important;
+}
+
+.MuiChip-root {
+    background: #EBEBF0 !important;
+}
+
+.chipItem {
+    display: flex;
+    justify-content: end;
+}
+
+.content-grid {
+    padding-left: 35%;
+    padding-right: 35%;
+}
+
+.formGrid {
+    padding-left: 20%;
+    padding-right: 20%;
+}
+
+.btnGrid {
+    display: flex;
+    padding-left: 20%;
+    padding-right: 20%;
+}
+
+.saveDraftbtn {
+    margin-right: 10px !important;
+    color: #000000 !important;
+    border-color: #000000 !important;
+    text-transform: capitalize !important;
+}
+
+.pdtop20 {
+    padding-top: 20px;
+}
+
+.deletebtn {
+    background: #DB4545 !important;
+    color: #FFFFFF !important;
+    text-transform: capitalize !important;
+}
+
+.savebtn {
+    background: #48233C !important;
+    text-transform: capitalize !important;
+}
