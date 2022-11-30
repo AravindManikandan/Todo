@@ -86,7 +86,15 @@ const CustomDialog = (props) => {
         <Dialog open={props.open} onClose={props.handleClose}>
             <DialogTitle>
                 <header className="main-header">
-                    Add/Edit Todo <CancelPresentationIcon onClick={props.handleClose} /></header>
+                    <Grid container lg={12} md={12} style={{ display: 'flex' }} >
+                        <Grid item lg={11} md={11} style={{ display: 'flex', justifyContent: 'center' }}>
+                            Add/Edit Todo
+                        </Grid>
+                        <Grid item lg={1} md={1} style={{ display: 'flex', justifyContent: 'end' }}>
+                            <CancelPresentationIcon style={{ marginTop: '6px'}}onClick={props.handleClose} />
+                        </Grid>
+                    </Grid>
+                </header>
             </DialogTitle>
             <DialogContent>
                 <Formik

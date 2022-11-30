@@ -117,7 +117,7 @@ function App() {
             </Grid>
           </Grid>
           {todo.map(ele => (
-            <Grid item style={{ marginBottom: '10px' }}>
+            <Grid item >
               <MediaCard data={ele} editForm={editForm} completeTodo={completeTodo} />
             </Grid>
           ))}
